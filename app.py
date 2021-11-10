@@ -3,7 +3,7 @@ from paho.mqtt import client as mqtt
 import threading
 import datetime
 from getshift import getshift
-eel.init('web')
+
 
 def on_connect(client, userdata, flags, rc):  # The callback for when the client connects to the broker
     print("Connected with result code {0}".format(str(rc)))  # Print result of connection attempt
@@ -33,5 +33,5 @@ def set_pyconfigs(jclient_id, jteam, jcanspercase, jtarget):
     shift = getshift()
     eel.set_jsconfigs(client_id, team, shift)
    
-
+eel.init('web')
 eel.start('index.html', host='localhost', port=27000, size=(1920, 1080), position=(0,0), )
