@@ -121,10 +121,10 @@ $('#submit').click(function() {
     const fclient_id = document.getElementById("fclient_id").value;
     const fteam = document.getElementById("fteam").value;
     const fcanspercase = document.getElementById("fcanspercase").value;
-    const ftarget = document.getElementById("ftarget").value;
+    target = document.getElementById("ftarget").value;
 
-    eel.set_pyconfigs(fclient_id, fteam, fcanspercase, ftarget)
-        // alert('settings saved successfully')
+    // eel.set_pyconfigs(fclient_id, fteam, fcanspercase, ftarget)
+    // alert('settings saved successfully')
     document.getElementById('actv').click()
 });
 
@@ -186,7 +186,7 @@ function set_metrics(pload) {
             // speed
         document.getElementById("speed1").innerHTML = payload.lspeed
             // efficiency
-        eff = (jsqueue(payload.lspeed, queue1) * 60 / target) * 100
+        eff = (jsqueue(payload.lspeed, queue1) * 12 / target) * 100
         addData1(eff)
 
 
@@ -197,7 +197,7 @@ function set_metrics(pload) {
             // speed
         document.getElementById("speed2").innerHTML = payload.lspeed
             // efficiency
-        eff = (jsqueue(payload.lspeed, queue2) * 60 / target) * 100
+        eff = (jsqueue(payload.lspeed, queue2) * 12 / target) * 100
         addData2(eff)
 
     }
