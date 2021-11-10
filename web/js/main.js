@@ -1,10 +1,12 @@
 document.addEventListener('contextmenu', event => event.preventDefault());
 
-left_l = 'L6'
-right_l = 'L5'
-queue1 = []
-queue2 = []
-target = 300
+const left_l = 'L6'
+const right_l = 'L5'
+let queue1 = []
+let queue2 = []
+const target = 300
+let hourly_l = ''
+let hourly_r = ''
 
 var myChart1 = new Chart(document.getElementById('mychart1'), {
     type: 'doughnut',
@@ -56,6 +58,7 @@ var myChart2 = new Chart(document.getElementById('mychart2'), {
 
 function addData1(data) {
     data = Math.round(data)
+    data > 100 ? data : 100
     colo = perc2color(data)
     alt = 100 - data
     if (alt < 1) { alt = 0 }
@@ -70,6 +73,7 @@ function addData1(data) {
 
 function addData2(data) {
     data = Math.round(data)
+    data > 100 ? data : 100
     colo = perc2color(data)
     alt = 100 - data
     if (alt < 1) { alt = 0 }
@@ -89,15 +93,26 @@ function openmodal() {
 //get hourly cases
 
 
-// setInterval(function() {
-//     // // get hourly cases
-//     // $.get("hourly", function(data, status) {
-//     //     alert("Data: " + data + "\nStatus: " + status);
-//     // });
+setInterval(function() {
+    // // get hourly cases
+    // $.get("hourly", function(data, status) {
+    //     alert("Data: " + data + "\nStatus: " + status);
+    // });
 
-//     //get target
+    //get target
 
-// }, 1000 * 60 * 15);
+}, 1000 * 60 * 15);
+
+function gethourly() {
+    $.get("hourlycases/" + left_l, function(data, status) {
+        console.log(data)
+        hourly_l = data
+    });
+    $.get("hourlycases/" + right_l, function(data, status) {
+        console.log(data)
+        hourly_r = data
+    });
+}
 
 // setInterval(function() {
 //     var data1 = (Math.floor((Math.random() * 100) + 1));
@@ -186,21 +201,20 @@ function set_metrics(pload) {
             // speed
         document.getElementById("speed1").innerHTML = payload.lspeed
             // efficiency
-        eff = (jsqueue(payload.lspeed, queue1) / target) * 100
+        speed = jsqueue(payload.lspeed, queue1)
+        eff = (speed / target) * 100
         addData1(eff)
-
-
 
     }
     if (payload.clientID == right_l) {
+
+        const speed = jsqueue(payload.lspeed, queue2)
+        eff = (speed / target) * 100
+        addData2(eff)
         document.getElementById("cans2").innerHTML = payload.cans
             // speed
-        document.getElementById("speed2").innerHTML = payload.lspeed
+        document.getElementById("speed2").innerHTML = speed
             // efficiency
-        eff = (jsqueue(payload.lspeed, queue2) / target) * 100
-        addData2(eff)
-        console.log("Target " + target)
-        console.log("speed queue" + jsqueue(payload.lspeed, queue2))
 
     }
     //seamed cans
