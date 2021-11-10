@@ -148,7 +148,7 @@ function arr_avg(arr) {
 }
 
 function jsqueue(num, arr) {
-    if (arr.length > 2) {
+    if (arr.length > 5) {
         arr.shift()
         arr.push(num)
     } else {
@@ -186,7 +186,7 @@ function set_metrics(pload) {
             // speed
         document.getElementById("speed1").innerHTML = payload.lspeed
             // efficiency
-        eff = (jsqueue(payload.lspeed, queue1) * 12 / target) * 100
+        eff = (jsqueue(payload.lspeed, queue1) / target) * 100
         addData1(eff)
 
 
@@ -197,8 +197,10 @@ function set_metrics(pload) {
             // speed
         document.getElementById("speed2").innerHTML = payload.lspeed
             // efficiency
-        eff = (jsqueue(payload.lspeed, queue2) * 12 / target) * 100
+        eff = (jsqueue(payload.lspeed, queue2) / target) * 100
         addData2(eff)
+        console.log("Target " + target)
+        console.log("speed queue" + jsqueue(payload.lspeed, queue2))
 
     }
     //seamed cans
