@@ -94,12 +94,7 @@ function openmodal() {
 
 
 setInterval(function() {
-    // // get hourly cases
-    // $.get("hourly", function(data, status) {
-    //     alert("Data: " + data + "\nStatus: " + status);
-    // });
-
-    //get target
+    gethourly()
 
 }, 1000 * 60 * 15);
 
@@ -113,14 +108,8 @@ function gethourly() {
         hourly_r = data
     });
 }
+gethourly()
 
-// setInterval(function() {
-//     var data1 = (Math.floor((Math.random() * 100) + 1));
-//     var data2 = (Math.floor((Math.random() * 100) + 1));
-//     addData1(data1)
-//     addData2(data2)
-
-// }, 500);
 
 document.addEventListener("DOMContentLoaded", function() {
     document.getElementById('actv').click()
@@ -217,16 +206,5 @@ function set_metrics(pload) {
             // efficiency
 
     }
-    //seamed cans
-    // document.getElementById("s_cans").innerHTML = s_cans
-
-    // //seamed cases 
-    // document.getElementById("s_cases").innerHTML = s_cases
-
-    // //damaged cans
-    // document.getElementById("damages").innerHTML = damages
-
-    // //downtime
-    // document.getElementById("downtime").innerHTML = downtime
 
 }
