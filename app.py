@@ -18,10 +18,10 @@ def on_message(client, userdata, msg):  # The callback for when a PUBLISH messag
 client = mqtt.Client("digi_mqtt_test")  # Create instance of client with client ID “digi_mqtt_test”
 client.on_connect = on_connect  # Define callback function for successful connection
 client.on_message = on_message  # Define callback function for receipt of a message
-username = ''
-password = ''
+username = 'dmkl'
+password = 'delmo'
 client.username_pw_set(username, password)
-client.connect('127.0.0.1', 1883, 60)
+client.connect('192.168.1.247', 1883, 60)
 client.loop_start()  #Start loop
 
 # {"clientID":"L1","cans":"0","packs":"0","lcases":"0","cases":"0","lspeed":"0","tstamp":"13917942","targetcases":"240","canspercase":"24","unitspercase":"1","hr_output":"0,0,0,0,0,0,0,0,0"}
