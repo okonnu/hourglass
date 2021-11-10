@@ -12,11 +12,11 @@ def on_connect(client, userdata, flags, rc):  # The callback for when the client
 
 
 def on_message(client, userdata, msg):  # The callback for when a PUBLISH message is received from the server.
-    print("Message received-> " + msg.topic + " " + str(msg.payload))  # Print a received msg
+    # print("Message received-> " + msg.topic + " " + str(msg.payload))  # Print a received msg
     eel.set_metrics(str(msg.payload))
     
 
-client = mqtt.Client("digi_mqtt_test")  # Create instance of client with client ID “digi_mqtt_test”
+client = mqtt.Client("l6l5")  # Create instance of client with client ID “digi_mqtt_test”
 client.on_connect = on_connect  # Define callback function for successful connection
 client.on_message = on_message  # Define callback function for receipt of a message
 username = 'dmkl'

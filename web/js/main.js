@@ -1,7 +1,7 @@
 document.addEventListener('contextmenu', event => event.preventDefault());
 
-left_l = 'l6'
-right_l = 'l5'
+left_l = 'L6'
+right_l = 'L5'
 queue1 = []
 queue2 = []
 target = 300
