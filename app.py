@@ -35,4 +35,4 @@ def set_pyconfigs(jclient_id, jteam, jcanspercase, jtarget):
     eel.set_jsconfigs(client_id, team, shift)
    
 
-eel.start('index.html', host='localhost', port=27000, size=(1920, 1080), position=(0,0), )
+eel.start('index.html', host='localhost', port=27000, size=(1280, 720), position=(0,0), )

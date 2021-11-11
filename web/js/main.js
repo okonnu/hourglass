@@ -99,11 +99,11 @@ setInterval(function() {
 }, 1000 * 60 * 15);
 
 function gethourly() {
-    $.get("hourlycases/" + left_l, function(data, status) {
+    $.get("http://192.168.1.247/hourlycases/" + left_l, function(data, status) {
         console.log(data)
         hourly_l = data
     });
-    $.get("hourlycases/" + right_l, function(data, status) {
+    $.get("http://192.168.1.247/hourlycases/" + right_l, function(data, status) {
         console.log(data)
         hourly_r = data
     });
