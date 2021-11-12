@@ -100,12 +100,26 @@ setInterval(function() {
 
 function gethourly() {
     $.get("http://192.168.1.247/hourlycases/" + left_l, function(data, status) {
-        console.log(data)
-        hourly_l = data
+        console.log(data.data[0].cases)
+        document.getElementById("hour21").innerHTML = data.data[0].cases
+        document.getElementById("hour22").innerHTML = data.data[1].cases
+        document.getElementById("hour23").innerHTML = data.data[2].cases
+        document.getElementById("hour24").innerHTML = data.data[3].cases
+        document.getElementById("hour25").innerHTML = data.data[4].cases
+        document.getElementById("hour26").innerHTML = data.data[5].cases
+        document.getElementById("hour27").innerHTML = data.data[6].cases
+        document.getElementById("hour28").innerHTML = data.data[7].cases
     });
     $.get("http://192.168.1.247/hourlycases/" + right_l, function(data, status) {
         console.log(data)
-        hourly_r = data
+        document.getElementById("hour11").innerHTML = data.data[0].cases
+        document.getElementById("hour12").innerHTML = data.data[1].cases
+        document.getElementById("hour13").innerHTML = data.data[2].cases
+        document.getElementById("hour14").innerHTML = data.data[3].cases
+        document.getElementById("hour15").innerHTML = data.data[4].cases
+        document.getElementById("hour16").innerHTML = data.data[5].cases
+        document.getElementById("hour17").innerHTML = data.data[6].cases
+        document.getElementById("hour18").innerHTML = data.data[7].cases
     });
 }
 gethourly()
