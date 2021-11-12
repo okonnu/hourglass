@@ -109,6 +109,8 @@ function gethourly() {
         document.getElementById("hour26").innerHTML = data.data[5].cases
         document.getElementById("hour27").innerHTML = data.data[6].cases
         document.getElementById("hour28").innerHTML = data.data[7].cases
+        document.getElementById("cases1").innerHTML = data.data[7].cases + data.data[6].cases + data.data[5].cases + data.data[4].cases + data.data[3].cases + data.data[2].cases + data.data[1].cases + data.data[0].cases
+
     });
     $.get("http://192.168.1.247/hourlycases/" + right_l, function(data, status) {
         console.log(data)
@@ -120,6 +122,7 @@ function gethourly() {
         document.getElementById("hour16").innerHTML = data.data[5].cases
         document.getElementById("hour17").innerHTML = data.data[6].cases
         document.getElementById("hour18").innerHTML = data.data[7].cases
+        document.getElementById("cases2").innerHTML = data.data[7].cases + data.data[6].cases + data.data[5].cases + data.data[4].cases + data.data[3].cases + data.data[2].cases + data.data[1].cases + data.data[0].cases
     });
 }
 gethourly()
