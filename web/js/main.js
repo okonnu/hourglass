@@ -4,7 +4,8 @@ const left_l = 'L6'
 const right_l = 'L5'
 let queue1 = []
 let queue2 = []
-const target = 300
+const target1 = 300
+const target2 = 300
 let hourly_l = ''
 let hourly_r = ''
 
@@ -208,19 +209,20 @@ function set_metrics(pload) {
         document.getElementById("speed1").innerHTML = payload.lspeed
             // efficiency
         speed = jsqueue(payload.lspeed, queue1)
-        eff = (speed / target) * 100
+        eff = (speed / target1) * 100
         addData1(eff)
+        document.getElementById("target1").innerHTML = target1
 
     }
     if (payload.clientID == right_l) {
 
         const speed = jsqueue(payload.lspeed, queue2)
-        eff = (speed / target) * 100
+        eff = (speed / target2) * 100
         addData2(eff)
         document.getElementById("cans2").innerHTML = payload.cans
             // speed
         document.getElementById("speed2").innerHTML = speed
-            // efficiency
+        document.getElementById("target2").innerHTML = target2
 
     }
 

@@ -39,6 +39,14 @@
     color: white;
 }
 
+.card h3 {
+    font-size: 60px;
+}
+
+.card p {
+    font-size: 22px;
+}
+
 .card-body {
     padding-bottom: 5px;
     color: white;
