@@ -1,8 +1,10 @@
 import eel
 from paho.mqtt import client as mqtt
 import threading
-import datetime
+import time
 from getshift import getshift
+import gethourly
+
 
 eel.init('web')
 
@@ -33,6 +35,15 @@ def set_pyconfigs(jclient_id, jteam, jcanspercase, jtarget):
     team = jteam
     shift = getshift()
     eel.set_jsconfigs(client_id, team, shift)
+    
+@eel.expose
+def get_hcases(l, r):
+    threading.Timer(60 * 15, sendcans).start()
+    eel.hcases_left(hcases(l))
+    time.sleep(5)
+    eel.hcases_right(hcases(r))
+    
+    
    
 
 eel.start('index.html', host='localhost', port=27011, size=(1280, 960), position=(0,0), cmdline_args=['--disable-web-security --user-data-dir="/home/pi"'] )

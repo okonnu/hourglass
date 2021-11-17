@@ -93,41 +93,37 @@ function openmodal() {
 
 //get hourly cases
 
+eel.expose(hcases_left);
 
-setInterval(function() {
-    gethourly()
+function hcases_left(data) {
+    console.log(data[0].cases)
+    document.getElementById("hour21").innerHTML = data[0].cases
+    document.getElementById("hour22").innerHTML = data[1].cases
+    document.getElementById("hour23").innerHTML = data[2].cases
+    document.getElementById("hour24").innerHTML = data[3].cases
+    document.getElementById("hour25").innerHTML = data[4].cases
+    document.getElementById("hour26").innerHTML = data[5].cases
+    document.getElementById("hour27").innerHTML = data[6].cases
+    document.getElementById("hour28").innerHTML = data[7].cases
+    document.getElementById("cases1").innerHTML = data[7].cases + data[6].cases + data[5].cases + data[4].cases + data[3].cases + data[2].cases + data[1].cases + data[0].cases
 
-}, 1000 * 60 * 15);
-
-function gethourly() {
-    $.get("http://192.168.1.247/hourlycases/" + left_l, function(data, status) {
-        console.log(data.data[0].cases)
-        document.getElementById("hour21").innerHTML = data.data[0].cases
-        document.getElementById("hour22").innerHTML = data.data[1].cases
-        document.getElementById("hour23").innerHTML = data.data[2].cases
-        document.getElementById("hour24").innerHTML = data.data[3].cases
-        document.getElementById("hour25").innerHTML = data.data[4].cases
-        document.getElementById("hour26").innerHTML = data.data[5].cases
-        document.getElementById("hour27").innerHTML = data.data[6].cases
-        document.getElementById("hour28").innerHTML = data.data[7].cases
-        document.getElementById("cases1").innerHTML = data.data[7].cases + data.data[6].cases + data.data[5].cases + data.data[4].cases + data.data[3].cases + data.data[2].cases + data.data[1].cases + data.data[0].cases
-
-    });
-    $.get("http://192.168.1.247/hourlycases/" + right_l, function(data, status) {
-        console.log(data)
-        document.getElementById("hour11").innerHTML = data.data[0].cases
-        document.getElementById("hour12").innerHTML = data.data[1].cases
-        document.getElementById("hour13").innerHTML = data.data[2].cases
-        document.getElementById("hour14").innerHTML = data.data[3].cases
-        document.getElementById("hour15").innerHTML = data.data[4].cases
-        document.getElementById("hour16").innerHTML = data.data[5].cases
-        document.getElementById("hour17").innerHTML = data.data[6].cases
-        document.getElementById("hour18").innerHTML = data.data[7].cases
-        document.getElementById("cases2").innerHTML = data.data[7].cases + data.data[6].cases + data.data[5].cases + data.data[4].cases + data.data[3].cases + data.data[2].cases + data.data[1].cases + data.data[0].cases
-    });
 }
-gethourly()
 
+eel.expose(hcases_right);
+
+function hcases_right(data) {
+    document.getElementById("hour11").innerHTML = data[0].cases
+    document.getElementById("hour12").innerHTML = data[1].cases
+    document.getElementById("hour13").innerHTML = data[2].cases
+    document.getElementById("hour14").innerHTML = data[3].cases
+    document.getElementById("hour15").innerHTML = data[4].cases
+    document.getElementById("hour16").innerHTML = data[5].cases
+    document.getElementById("hour17").innerHTML = data[6].cases
+    document.getElementById("hour18").innerHTML = data[7].cases
+    document.getElementById("cases2").innerHTML = data[7].cases + data[6].cases + data[5].cases + data[4].cases + data[3].cases + data[2].cases + data[1].cases + data[0].cases
+}
+//launch hourly cases
+eel.get_hcases(left_l, right_l)
 
 document.addEventListener("DOMContentLoaded", function() {
     document.getElementById('actv').click()
