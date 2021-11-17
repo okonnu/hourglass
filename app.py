@@ -39,9 +39,11 @@ def set_pyconfigs(jclient_id, jteam, jcanspercase, jtarget):
 @eel.expose
 def get_hcases(l, r):
     threading.Timer(60 * 15, sendcans).start()
-    eel.hcases_left(hcases(l))
+    lcase = hcases(l)
+    eel.hcases_left(lcase)
     time.sleep(5)
-    eel.hcases_right(hcases(r))
+    rcase = hcases(r)
+    eel.hcases_right(rcase)
     
     
    
