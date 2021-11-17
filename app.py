@@ -3,7 +3,7 @@ from paho.mqtt import client as mqtt
 import threading
 import time
 from getshift import getshift
-import gethourly
+from gethourly import hcases
 
 
 eel.init('web')
