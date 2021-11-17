@@ -4,7 +4,6 @@ import threading
 import time
 from getshift import getshift
 from gethourly import hcases
-import json
 
 
 eel.init('web')
@@ -40,12 +39,11 @@ def set_pyconfigs(jclient_id, jteam, jcanspercase, jtarget):
 @eel.expose
 def get_hcases(l, r):
     threading.Timer(60 * 15, get_hcases).start()
-    lcase = json.loads(hcases(l))
-    print(lcase.data)
-    # eel.hcases_left(lcase[])
+    lcase = hcases(l)
+    eel.hcases_left(lcase)
     time.sleep(5)
     rcase = hcases(r)
-    # eel.hcases_right(rcase)
+    eel.hcases_right(rcase)
     
     
    
