@@ -8,16 +8,16 @@ const target1 = 300
 const target2 = 300
 let hourly_l = ''
 let hourly_r = ''
-
+initcolo = perc2color(10)
 var myChart1 = new Chart(document.getElementById('mychart1'), {
     type: 'doughnut',
     data: {
         labels: ["Efficiency", ""],
         datasets: [{
             label: 'Efficiency',
-            data: ["20", "80"],
+            data: ["1", "99"],
             backgroundColor: [
-                "#a2d6c4",
+                initcolo,
                 "transparent"
             ]
         }]
@@ -31,16 +31,13 @@ var myChart1 = new Chart(document.getElementById('mychart1'), {
     }
 });
 
-
-
-initcolo = perc2color(10)
 var myChart2 = new Chart(document.getElementById('mychart2'), {
     type: 'doughnut',
     data: {
         labels: ["Efficiency", ""],
         datasets: [{
             label: 'Visitor',
-            data: ["50", "50"],
+            data: ["1", "99"],
             backgroundColor: [
                 initcolo,
                 "transparent"
@@ -106,21 +103,10 @@ function hcases_left(data) {
     data = JSON.parse(data)
     data = data.data
     data = (data.reduce((data, b) => data.set(b.hr, (data.get(b.hr) || 0) + Number(b.cases)), new Map))
-    let summ = 0;
-    for (let key in data) {
-        summ += data[key];
-    }
     data = Array.from(data, ([name, value]) => ({ name, value }));
-    console.log(data)
-    document.getElementById("hour21").innerHTML = data[0].value
-    document.getElementById("hour22").innerHTML = data[1].value
-    document.getElementById("hour23").innerHTML = data[2].value
-    document.getElementById("hour24").innerHTML = data[3].value
-    document.getElementById("hour25").innerHTML = data[4].value
-    document.getElementById("hour26").innerHTML = data[5].value
-    document.getElementById("hour27").innerHTML = data[6].value
-    document.getElementById("hour28").innerHTML = data[7].value
-    document.getElementById("cases2").innerHTML = summ
+    const sumcases = sumarray(data)
+    assigndata(data, 'l')
+    document.getElementById("cases1").innerHTML = sumcases
 
 }
 
@@ -130,21 +116,10 @@ function hcases_right(data) {
     data = JSON.parse(data)
     data = data.data
     data = (data.reduce((data, b) => data.set(b.hr, (data.get(b.hr) || 0) + Number(b.cases)), new Map))
-    let summ = 0;
-    for (let key in data) {
-        summ += data[key];
-    }
     data = Array.from(data, ([name, value]) => ({ name, value }));
-    console.log(data)
-    document.getElementById("hour11").innerHTML = data[0].value
-    document.getElementById("hour12").innerHTML = data[1].value
-    document.getElementById("hour13").innerHTML = data[2].value
-    document.getElementById("hour14").innerHTML = data[3].value
-    document.getElementById("hour15").innerHTML = data[4].value
-    document.getElementById("hour16").innerHTML = data[5].value
-    document.getElementById("hour17").innerHTML = data[6].value
-    document.getElementById("hour18").innerHTML = data[7].value
-    document.getElementById("cases1").innerHTML = summ
+    const sumcases = sumarray(data)
+    assigndata(data, 'r')
+    document.getElementById("cases2").innerHTML = sumcases
 }
 //launch hourly cases
 eel.get_hcases(left_l, right_l)
@@ -198,6 +173,37 @@ function jsqueue(num, arr) {
     }
     const avg = arr_avg(arr)
     return avg
+}
+
+function summap(ob) {
+    let sum = 0;
+    for (let key in ob) {
+        sum += ob[key];
+    }
+    return sum
+}
+
+function sumarray(object) {
+    total = 0
+    for (const items of object) {
+        total += items.value
+    }
+    return total
+}
+
+function assigndata(object, pos) {
+    for (const [index, item] of object.entries()) {
+        console.log(index)
+        let x = 0
+        if (pos === 'r') {
+            x = 21 + index
+        } else {
+            x = 11 + index
+        }
+        x = 'hour' + x
+        console.log(x)
+        document.getElementById(x).innerHTML = item.value
+    }
 }
 
 // retrieve settings from python, and save on js
