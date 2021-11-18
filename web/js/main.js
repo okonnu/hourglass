@@ -1,7 +1,7 @@
 document.addEventListener('contextmenu', event => event.preventDefault());
 
-const left_l = 'L2'
-const right_l = 'L1'
+const left_l = 'L4'
+const right_l = 'L3'
 let queue1 = []
 let queue2 = []
 const target1 = 300
@@ -106,6 +106,10 @@ function hcases_left(data) {
     data = JSON.parse(data)
     data = data.data
     data = (data.reduce((data, b) => data.set(b.hr, (data.get(b.hr) || 0) + Number(b.cases)), new Map))
+    let summ = 0;
+    for (let key in data) {
+        summ += data[key];
+    }
     data = Array.from(data, ([name, value]) => ({ name, value }));
     console.log(data)
     document.getElementById("hour21").innerHTML = data[0].value
@@ -116,7 +120,7 @@ function hcases_left(data) {
     document.getElementById("hour26").innerHTML = data[5].value
     document.getElementById("hour27").innerHTML = data[6].value
     document.getElementById("hour28").innerHTML = data[7].value
-    document.getElementById("cases2").innerHTML = data[7].value + data[6].value + data[5].value + data[4].value + data[3].value + data[2].value + data[1].value + data[0].value
+    document.getElementById("cases2").innerHTML = summ
 
 }
 
@@ -126,6 +130,10 @@ function hcases_right(data) {
     data = JSON.parse(data)
     data = data.data
     data = (data.reduce((data, b) => data.set(b.hr, (data.get(b.hr) || 0) + Number(b.cases)), new Map))
+    let summ = 0;
+    for (let key in data) {
+        summ += data[key];
+    }
     data = Array.from(data, ([name, value]) => ({ name, value }));
     console.log(data)
     document.getElementById("hour11").innerHTML = data[0].value
@@ -136,7 +144,7 @@ function hcases_right(data) {
     document.getElementById("hour16").innerHTML = data[5].value
     document.getElementById("hour17").innerHTML = data[6].value
     document.getElementById("hour18").innerHTML = data[7].value
-    document.getElementById("cases1").innerHTML = data[7].value + data[6].value + data[5].value + data[4].value + data[3].value + data[2].value + data[1].value + data[0].value
+    document.getElementById("cases1").innerHTML = summ
 }
 //launch hourly cases
 eel.get_hcases(left_l, right_l)
@@ -215,7 +223,10 @@ function set_metrics(pload) {
 
     //  {"clientID":"L1","cans":"0","packs":"0","lcases":"0","cases":"0","lspeed":"0","tstamp":"13917942","targetcases":"240","canspercase":"24","unitspercase":"1","hr_output":"0,0,0,0,0,0,0,0,0"}
     if (payload.clientID == left_l) {
-        // cans
+
+        //client id
+        document.getElementById("client_left").innerHTML = payload.clientID
+            // cans
         document.getElementById("cans1").innerHTML = payload.cans
             // speed
         document.getElementById("speed1").innerHTML = payload.lspeed
@@ -235,6 +246,8 @@ function set_metrics(pload) {
             // speed
         document.getElementById("speed2").innerHTML = speed
         document.getElementById("target2").innerHTML = target2
+            //client id
+        document.getElementById("client_right").innerHTML = payload.clientID
 
     }
 
