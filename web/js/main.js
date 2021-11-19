@@ -100,26 +100,37 @@ function openmodal() {
 eel.expose(hcases_left);
 
 function hcases_left(data) {
-    data = JSON.parse(data)
-    data = data.data
-    data = (data.reduce((data, b) => data.set(b.hr, (data.get(b.hr) || 0) + Number(b.cases)), new Map))
-    data = Array.from(data, ([name, value]) => ({ name, value }));
-    const sumcases = sumarray(data)
-    assigndata(data, 'l')
-    document.getElementById("cases1").innerHTML = sumcases
+    if (JSON.parse(data)) {
+        data = JSON.parse(data)
+        data = data.data
+        data = (data.reduce((data, b) => data.set(b.hr, (data.get(b.hr) || 0) + Number(b.cases)), new Map))
+        data = Array.from(data, ([name, value]) => ({ name, value }));
+        const sumcases = sumarray(data)
+        assigndata(data, 'l')
+        document.getElementById("cases1").innerHTML = sumcases
+    } else {
+        return 0;
+    }
+
 
 }
 
 eel.expose(hcases_right);
 
 function hcases_right(data) {
-    data = JSON.parse(data)
-    data = data.data
-    data = (data.reduce((data, b) => data.set(b.hr, (data.get(b.hr) || 0) + Number(b.cases)), new Map))
-    data = Array.from(data, ([name, value]) => ({ name, value }));
-    const sumcases = sumarray(data)
-    assigndata(data, 'r')
-    document.getElementById("cases2").innerHTML = sumcases
+    if (JSON.parse(data)) {
+        data = JSON.parse(data)
+        data = data.data
+        data = (data.reduce((data, b) => data.set(b.hr, (data.get(b.hr) || 0) + Number(b.cases)), new Map))
+        data = Array.from(data, ([name, value]) => ({ name, value }));
+        const sumcases = sumarray(data)
+        assigndata(data, 'r')
+        document.getElementById("cases2").innerHTML = sumcases
+    } else {
+        return 0;
+    }
+
+
 }
 //launch hourly cases
 eel.get_hcases(left_l, right_l)
