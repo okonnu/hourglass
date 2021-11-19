@@ -1,7 +1,7 @@
 document.addEventListener('contextmenu', event => event.preventDefault());
 
-const left_l = 'L2'
-const right_l = 'L1'
+const left_l = 'L4'
+const right_l = 'L3'
 let queue1 = []
 let queue2 = []
 const target1 = 300
@@ -111,8 +111,6 @@ function hcases_left(data) {
     } else {
         return 0;
     }
-
-
 }
 
 eel.expose(hcases_right);
@@ -129,8 +127,6 @@ function hcases_right(data) {
     } else {
         return 0;
     }
-
-
 }
 //launch hourly cases
 eel.get_hcases(left_l, right_l)
@@ -145,12 +141,10 @@ function updatetarget() {
 }
 
 $('#submit').click(function() {
-
     const fclient_id = document.getElementById("fclient_id").value;
     const fteam = document.getElementById("fteam").value;
     const fcanspercase = document.getElementById("fcanspercase").value;
     target = document.getElementById("ftarget").value;
-
     // eel.set_pyconfigs(fclient_id, fteam, fcanspercase, ftarget)
     // alert('settings saved successfully')
     document.getElementById('actv').click()
