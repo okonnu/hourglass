@@ -1,7 +1,7 @@
 document.addEventListener('contextmenu', event => event.preventDefault());
 
-const left_l = 'L4'
-const right_l = 'L3'
+const left_l = 'L6'
+const right_l = 'L5'
 let queue1 = []
 let queue2 = []
 const target1 = 300
