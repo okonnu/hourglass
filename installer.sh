@@ -1,7 +1,7 @@
 
 echo 'HMI installer initiated -credits: Dag' &&
 sleep 3 &&
-echo'creating autostart folder, deleting if available' &&
+echo 'creating autostart folder, deleting if available' &&
 sudo rm -rf /home/pi/.config/autostart &&
 mkdir /home/pi/.config/autostart &&
 
