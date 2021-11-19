@@ -1,5 +1,7 @@
 sudo rm /etc/xdg/lxsession/LXDE-pi/sshpwd.sh
 echo 'HMI installer initiated -credits: Dag' &&
+echo 'installing prerequisites' &&
+pip3 install paho-mqtt && pip3 install eel &&
 sleep 3 &&
 echo 'creating autostart folder, deleting if available' &&
 sudo rm -rf /home/pi/.config/autostart &&
