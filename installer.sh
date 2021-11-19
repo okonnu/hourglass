@@ -1,4 +1,4 @@
-
+sudo rm /etc/xdg/lxsession/LXDE-pi/sshpwd.sh
 echo 'HMI installer initiated -credits: Dag' &&
 sleep 3 &&
 echo 'creating autostart folder, deleting if available' &&
