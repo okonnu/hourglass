@@ -6,7 +6,7 @@ sudo rm -rf /home/pi/.config/autostart &&
 mkdir /home/pi/.config/autostart &&
 sleep 3 &&
 echo 'creating the startup.sh file at /home/pi' &&
-echo "/usr/bin/python3 /home/pi/project/l_screens/app.py" > /home/pi/startup.sh &&
+echo $'kill -9 $(lsof -t -i:8080)\n/usr/bin/python3 /home/pi/project/l_screens/app.py' > /home/pi/startup.sh &&
 chmod 755 /home/pi/startup.sh &&
 
 sleep 3 &&
