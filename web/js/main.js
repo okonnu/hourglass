@@ -1,11 +1,11 @@
 document.addEventListener('contextmenu', event => event.preventDefault());
 
-const left_l = 'L4'
+const left_l = 'L6'
 const right_l = 'L3'
 let queue1 = []
 let queue2 = []
-const target_l = 400
-const target_r = 400
+const target_l = 300
+const target_r = 300
 let hourly_l = ''
 let hourly_r = ''
 initcolo = perc2color(10)
@@ -173,7 +173,7 @@ function arr_avg(arr) {
 }
 
 function jsqueue(num, arr) {
-    if (arr.length > 2) {
+    if (arr.length > 1) {
         arr.shift()
         arr.push(num)
     } else {
