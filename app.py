@@ -48,4 +48,4 @@ def get_hcases(l, r):
     
    
 
-eel.start('index.html', host='localhost', port=27011, size=(1024,768), position=(0,0), cmdline_args=['--disable-infobars'] )
+eel.start('index.html', host='localhost', port=27011, size=(1280,960), position=(0,0), cmdline_args=['--disable-infobars'] )
