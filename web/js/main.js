@@ -130,6 +130,9 @@ function hcases_right(data) {
 }
 //launch hourly cases
 eel.get_hcases(left_l, right_l)
+setInterval(function() {
+    eel.get_hcases(left_l, right_l)
+}, 1000 * 60 * 15);
 
 document.addEventListener("DOMContentLoaded", function() {
     document.getElementById('actv').click()
