@@ -38,11 +38,18 @@ def set_pyconfigs(jclient_id, jteam, jcanspercase, jtarget):
     
 @eel.expose
 def get_hcases(l, r):
-    lcase = hcases(l)
-    eel.hcases_left(lcase)
+    try:
+        lcase = hcases(l)
+        eel.hcases_left(lcase)
+    except:
+        print(str(l) + ": Could not render hourly cases: " + str(lcase))
     time.sleep(5)
-    rcase = hcases(r)
-    eel.hcases_right(rcase)
+    
+    try:
+        rcase = hcases(r)
+        eel.hcases_right(rcase)
+    except:
+        print(str(r) + ": Could not render hourly cases: " + str(lcase))
     
     
    
