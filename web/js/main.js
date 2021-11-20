@@ -245,7 +245,7 @@ function set_metrics(pload) {
         speed = jsqueue(payload.lspeed, queue1)
         eff = (speed / target_l) * 100
         addData1(eff)
-        document.getElementById("target2").innerHTML = target_l
+        document.getElementById("target1").innerHTML = target_l
 
     }
     if (payload.clientID == right_l) {
