@@ -170,7 +170,7 @@ function arr_avg(arr) {
 }
 
 function jsqueue(num, arr) {
-    if (arr.length > 5) {
+    if (arr.length > 2) {
         arr.shift()
         arr.push(num)
     } else {
