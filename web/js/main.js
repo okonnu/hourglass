@@ -1,11 +1,11 @@
 document.addEventListener('contextmenu', event => event.preventDefault());
 
-const left_l = 'L6'
-const right_l = 'L5'
+const left_l = 'L2'
+const right_l = 'L1'
 let queue1 = []
 let queue2 = []
-const target_l = 300
-const target_r = 300
+const target_l = 400
+const target_r = 200
 let hourly_l = ''
 let hourly_r = ''
 initcolo = perc2color(10)
