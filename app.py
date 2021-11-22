@@ -54,4 +54,4 @@ def get_hcases(l, r):
     
    
 
-eel.start('index.html', host='localhost', port=27011, size=(1280,960), position=(0,0), cmdline_args=['--no-sandbox','--disable-infobars','--start-fullscreen'] )
+eel.start('index.html', host='localhost', port=27011, size=(1280,960), position=(0,0), cmdline_args=['--incognito','--disable-infobars','--start-fullscreen'] )
