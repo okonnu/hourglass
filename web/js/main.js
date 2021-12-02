@@ -10,8 +10,6 @@ let hourly_l = ''
 let hourly_r = ''
 let client_id = ''
 
-eel.set_pyconfigs();
-
 
 initcolo = perc2color(10)
 var myChart1 = new Chart(document.getElementById('mychart1'), {
@@ -133,6 +131,24 @@ function hcases_right(data) {
         return 0;
     }
 }
+
+// retrieve settings from python, and save on js
+eel.expose(set_jsconfigs);
+
+function set_jsconfigs(clientid, left, right, targetl, targetr) {
+    // console.log(client_id)
+    client_id = clientid;
+    left_l = left;
+    right_l = right;
+    target_l = targetl;
+    target_r = targetr;
+    document.getElementById("target1").innerHTML = target_l
+    document.getElementById("target2").innerHTML = target_r
+}
+
+
+//setconfigs
+eel.set_pyconfigs();
 //launch hourly cases
 eel.get_hcases(left_l, right_l)
 setInterval(function() {
@@ -218,19 +234,6 @@ function assigndata(object, pos) {
     }
 }
 
-// retrieve settings from python, and save on js
-eel.expose(set_jsconfigs);
-
-function set_jsconfigs(clientid, left, right, targetl, targetr) {
-    // console.log(client_id)
-    client_id = clientid;
-    left_l = left;
-    right_l = right;
-    target_l = targetl;
-    target_r = targetr;
-    document.getElementById("target1").innerHTML = target_l
-    document.getElementById("target2").innerHTML = target_r
-}
 
 
 eel.expose(set_metrics);
