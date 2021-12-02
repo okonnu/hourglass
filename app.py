@@ -71,7 +71,7 @@ def get_hcases():
     time.sleep(5)
     
     try:
-        rcase = hcases(os.getenv('TARGET_R'))
+        rcase = hcases(os.getenv('RIGHT'))
         eel.hcases_right(rcase)
     except:
         print(str(r) + ": Could not render hourly cases: " + str(lcase))
