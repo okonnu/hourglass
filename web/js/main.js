@@ -10,6 +10,8 @@ let hourly_l = ''
 let hourly_r = ''
 let client_id = ''
 
+eel.set_pyconfigs();
+
 
 initcolo = perc2color(10)
 var myChart1 = new Chart(document.getElementById('mychart1'), {
@@ -273,8 +275,3 @@ function set_metrics(pload) {
 
 
 }
-
-document.addEventListener("DOMContentLoaded", function() {
-    // code...
-    eel.set_pyconfigs();
-});
