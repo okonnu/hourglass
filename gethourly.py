@@ -3,7 +3,7 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 def hcases(line):
-     print('getting hourly for line'+ line)
+    print('getting hourly for line'+ line)
     print('---------------')
     url = os.getenv('GET_HCASES_URL') + line
     x = requests.get(url)
