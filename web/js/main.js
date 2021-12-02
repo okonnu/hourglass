@@ -1,7 +1,7 @@
 document.addEventListener('contextmenu', event => event.preventDefault());
 
-let left_l = 'L6'
-let right_l = 'L5'
+let left_l = 'L2'
+let right_l = 'L1'
 let queue1 = []
 let queue2 = []
 let target_l = 400
@@ -150,9 +150,9 @@ function set_jsconfigs(clientid, left, right, targetl, targetr) {
 //setconfigs
 eel.set_pyconfigs();
 //launch hourly cases
-eel.get_hcases(left_l, right_l)
+eel.get_hcases()
 setInterval(function() {
-    eel.get_hcases(left_l, right_l)
+    eel.get_hcases()
 }, 1000 * 60 * 15);
 
 document.addEventListener("DOMContentLoaded", function() {

@@ -62,16 +62,16 @@ def set_pyconfigs():
 
 
 @eel.expose
-def get_hcases(l, r):
+def get_hcases():
     try:
-        lcase = hcases(l)
+        lcase = hcases(os.getenv('LEFT'))
         eel.hcases_left(lcase)
     except:
         print(str(l) + ": Could not render hourly cases: " + str(lcase))
     time.sleep(5)
     
     try:
-        rcase = hcases(r)
+        rcase = hcases(os.getenv('TARGET_R'))
         eel.hcases_right(rcase)
     except:
         print(str(r) + ": Could not render hourly cases: " + str(lcase))
