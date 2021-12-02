@@ -19,9 +19,9 @@ echo 'you can now add commands you want to run on boot on the startup file. they
 
 sleep 3 &&
 echo 'creating cronjobs to restart the raspberry every 6am, 2am and 10pm. always ensure that there is internet so that the system time will always be accurate' &&
-cronjob1="0 6 * * * /sbin/shutdown -r now" &&
-cronjob2="0 14 * * * /sbin/shutdown -r now" &&
-cronjob3="0 22 * * * /sbin/shutdown -r now" &&
+cronjob1="20 6 * * * sudo /sbin/shutdown -r now" &&
+cronjob2="0 14 * * * sudo /sbin/shutdown -r now" &&
+cronjob3="0 22 * * * sudo /sbin/shutdown -r now" &&
 ( crontab -l | grep -v -F "$cronjob1" ; echo "$cronjob1" ) | crontab - &&
 ( crontab -l | grep -v -F "$cronjob2" ; echo "$cronjob2" ) | crontab - &&
 ( crontab -l | grep -v -F "$cronjob3" ; echo "$cronjob3" ) | crontab - &&
