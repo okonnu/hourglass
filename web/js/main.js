@@ -1,13 +1,16 @@
 document.addEventListener('contextmenu', event => event.preventDefault());
 
-const left_l = 'L2'
-const right_l = 'L1'
+let left_l = 'L6'
+let right_l = 'L5'
 let queue1 = []
 let queue2 = []
-const target_l = 400
-const target_r = 200
+let target_l = 400
+let target_r = 200
 let hourly_l = ''
 let hourly_r = ''
+let client_id = ''
+
+
 initcolo = perc2color(10)
 var myChart1 = new Chart(document.getElementById('mychart1'), {
     type: 'doughnut',
@@ -148,7 +151,6 @@ $('#submit').click(function() {
     const fteam = document.getElementById("fteam").value;
     const fcanspercase = document.getElementById("fcanspercase").value;
     target = document.getElementById("ftarget").value;
-    // eel.set_pyconfigs(fclient_id, fteam, fcanspercase, ftarget)
     // alert('settings saved successfully')
     document.getElementById('actv').click()
 });
@@ -217,23 +219,27 @@ function assigndata(object, pos) {
 // retrieve settings from python, and save on js
 eel.expose(set_jsconfigs);
 
-function set_jsconfigs(client_id, team, canspercase, target, shift) {
-    // client title
-    document.getElementById('client_id').innerHTML = client_id.replace(/^\D+/g, '');
-    //team
-    document.getElementById("team").innerHTML = team
-        //shift
-    document.getElementById("shift").innerHTML = shift
-
+function set_jsconfigs(clientid, left, right, targetl, targetr) {
+    // console.log(client_id)
+    client_id = clientid;
+    left_l = left;
+    right_l = right;
+    target_l = targetl;
+    target_r = targetr;
+    document.getElementById("target1").innerHTML = target_l
+    document.getElementById("target2").innerHTML = target_r
 }
 
 
 eel.expose(set_metrics);
 
 function set_metrics(pload) {
+
     str = pload.substring(2);
     str = str.slice(0, -1);
+    console.log(str)
     payload = JSON.parse(str)
+
 
     //  {"clientID":"L1","cans":"0","packs":"0","lcases":"0","cases":"0","lspeed":"0","tstamp":"13917942","targetcases":"240","canspercase":"24","unitspercase":"1","hr_output":"0,0,0,0,0,0,0,0,0"}
     if (payload.clientID == left_l) {
@@ -265,4 +271,10 @@ function set_metrics(pload) {
 
     }
 
+
 }
+
+document.addEventListener("DOMContentLoaded", function() {
+    // code...
+    eel.set_pyconfigs();
+});
