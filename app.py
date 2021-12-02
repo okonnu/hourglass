@@ -18,7 +18,7 @@ def on_connect(client, userdata, flags, rc):  # The callback for when the client
     client.subscribe(os.getenv('RESET_TOPIC'))
 
 def on_message(client, userdata, msg):  # The callback for when a PUBLISH message is received from the server.
-    print("Message received-> " + msg.topic + " " + str(msg.payload))  # Print a received msg
+    # print("Message received-> " + msg.topic + " " + str(msg.payload))  # Print a received msg
     if msg.topic == os.getenv('RESET_TOPIC'):
         # if str(msg.payload) == os.getenv('RESET_TOPIC'):
         restart()
@@ -79,4 +79,4 @@ def get_hcases(l, r):
     
    
 
-eel.start('index.html', host='localhost', port=27011, size=(1280,960), position=(0,0), cmdline_args=['--disable-infobars','--Kiosk'] )
+eel.start('index.html', host='localhost', port=27011, size=(1280,960), position=(0,0), cmdline_args=['--disable-infobars','--Kiosk','--incognito'] )
