@@ -68,13 +68,13 @@ def get_hcases():
     try:
         eel.hcases_left(lcase)
     except:
-        print(str(os.getenv('LEFT')) + ": Could not render hourly cases: " + str(lcase))
+        print(str(os.getenv('LEFT')) + ": Could not render left hourly cases: ")
     time.sleep(5)
     
     try: 
         eel.hcases_right(rcase)
     except:
-        print(str(os.getenv('LEFT')) + ": Could not render hourly cases: " + str(rcase))
+        print(str(os.getenv('LEFT')) + ": Could not render right hourly cases: ")
     
     
    
