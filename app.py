@@ -7,7 +7,7 @@ from gethourly import hcases
 import os
 from dotenv import load_dotenv
 from resetRpi import restart
-from resetRpi import restart
+
 
 
 eel.init('web')
@@ -67,14 +67,14 @@ def get_hcases():
         lcase = hcases(os.getenv('LEFT'))
         eel.hcases_left(lcase)
     except:
-        print(str(l) + ": Could not render hourly cases: " + str(lcase))
+        print(str(os.getenv('LEFT')) + ": Could not render hourly cases: " + str(lcase))
     time.sleep(5)
     
     try:
         rcase = hcases(os.getenv('RIGHT'))
         eel.hcases_right(rcase)
     except:
-        print(str(r) + ": Could not render hourly cases: " + str(lcase))
+        print(str(os.getenv('LEFT')) + ": Could not render hourly cases: " + str(rcase))
     
     
    
