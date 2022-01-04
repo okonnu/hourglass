@@ -1,177 +1,24 @@
 document.addEventListener('contextmenu', event => event.preventDefault());
 
-let left_l = 'L2'
-let right_l = 'L1'
-let queue1 = []
-let queue2 = []
-let target_l = 400
-let target_r = 200
-let hourly_l = ''
-let hourly_r = ''
-let client_id = ''
+const validate = (max, el) => {
 
-
-initcolo = perc2color(10)
-var myChart1 = new Chart(document.getElementById('mychart1'), {
-    type: 'doughnut',
-    data: {
-        labels: ["Efficiency", ""],
-        datasets: [{
-            label: 'Efficiency',
-            data: ["1", "99"],
-            backgroundColor: [
-                initcolo,
-                "transparent"
-            ]
-        }]
-    },
-    options: {
-        responsive: true,
-        legend: false,
-        animation: {
-            duration: 500
-        }
-    }
-});
-
-var myChart2 = new Chart(document.getElementById('mychart2'), {
-    type: 'doughnut',
-    data: {
-        labels: ["Efficiency", ""],
-        datasets: [{
-            label: 'Visitor',
-            data: ["1", "99"],
-            backgroundColor: [
-                initcolo,
-                "transparent"
-            ]
-        }]
-    },
-    options: {
-        responsive: true,
-        legend: false,
-        animation: {
-            duration: 500
-        }
-    }
-});
-
-function toObject(map) {
-    let obj = Object.create(null);
-    for (let [key, value] of map.entries()) {
-        obj[key] = value;
-    }
-    return obj;
-}
-
-function addData1(data) {
-    data = Math.round(data)
-    data > 100 ? data : 100
-    colo = perc2color(data)
-    alt = 100 - data
-    if (alt < 1) { alt = 0 }
-    myChart1.data.datasets.forEach((dataset) => {
-        dataset.data[0] = data;
-        dataset.data[1] = alt;
-        dataset.backgroundColor[0] = colo
-    });
-    document.getElementById('efficiency1').innerHTML = data + '%'
-    myChart1.update(0);
-}
-
-function addData2(data) {
-    data = Math.round(data)
-    data > 100 ? data : 100
-    colo = perc2color(data)
-    alt = 100 - data
-    if (alt < 1) { alt = 0 }
-    myChart2.data.datasets.forEach((dataset) => {
-        dataset.data[0] = data;
-        dataset.data[1] = alt;
-        dataset.backgroundColor[0] = colo
-    });
-    document.getElementById('efficiency2').innerHTML = data + '%'
-    myChart2.update(0);
-}
-
-function openmodal() {
-    $('#passwordmodal').modal('show')
-}
-
-//get hourly cases
-
-eel.expose(hcases_left);
-
-function hcases_left(data) {
-    if (JSON.parse(data)) {
-        data = JSON.parse(data)
-        data = data.data
-        data = (data.reduce((data, b) => data.set(b.hr, (data.get(b.hr) || 0) + Number(b.cases)), new Map))
-        data = Array.from(data, ([name, value]) => ({ name, value }));
-        const sumcases = sumarray(data)
-        assigndata(data, 'l')
-        document.getElementById("cases1").innerHTML = sumcases
-    } else {
-        return 0;
+    if (el.value > max) {
+        el.value = max;
     }
 }
+breakinterval = 0
+let msg = 'no message'
+    // text to speech
+const texttospeech = (sentence) => {
+    let speech = new SpeechSynthesisUtterance();
+    let voices = speechSynthesis.getVoices();
+    speech.voice = voices.find(({ lang }) => lang == "en-US");;
+    speech.text = sentence == null ? document.getElementById("heading").value : sentence
+    speechSynthesis.speak(speech);
+    const found = voices.find(({ lang }) => lang == "en-US");
 
-eel.expose(hcases_right);
-
-function hcases_right(data) {
-    if (JSON.parse(data)) {
-        data = JSON.parse(data)
-        data = data.data
-        data = (data.reduce((data, b) => data.set(b.hr, (data.get(b.hr) || 0) + Number(b.cases)), new Map))
-        data = Array.from(data, ([name, value]) => ({ name, value }));
-        const sumcases = sumarray(data)
-        assigndata(data, 'r')
-        document.getElementById("cases2").innerHTML = sumcases
-    } else {
-        return 0;
-    }
+    console.log(found)
 }
-
-// retrieve settings from python, and save on js
-eel.expose(set_jsconfigs);
-
-function set_jsconfigs(clientid, left, right, targetl, targetr) {
-    // console.log(client_id)
-    client_id = clientid;
-    left_l = left;
-    right_l = right;
-    target_l = targetl;
-    target_r = targetr;
-    document.getElementById("target1").innerHTML = target_l
-    document.getElementById("target2").innerHTML = target_r
-}
-
-
-//setconfigs
-eel.set_pyconfigs();
-//launch hourly cases
-eel.get_hcases()
-setInterval(function() {
-    eel.get_hcases()
-}, 1000 * 60 * 15);
-
-document.addEventListener("DOMContentLoaded", function() {
-    document.getElementById('actv').click()
-});
-
-function updatetarget() {
-    const tgt = document.getElementById('ftarget').value
-    document.getElementById('rangee').innerHTML = tgt
-}
-
-$('#submit').click(function() {
-    const fclient_id = document.getElementById("fclient_id").value;
-    const fteam = document.getElementById("fteam").value;
-    const fcanspercase = document.getElementById("fcanspercase").value;
-    target = document.getElementById("ftarget").value;
-    // alert('settings saved successfully')
-    document.getElementById('actv').click()
-});
 
 function perc2color(perc) {
     perc = perc / 1.5
@@ -187,94 +34,124 @@ function perc2color(perc) {
     return '#' + ('000000' + h.toString(16)).slice(-6);
 }
 
-function arr_avg(arr) {
-    const total = arr.reduce((acc, c) => acc + parseInt(c), 0)
-    return total / arr.length
-}
-
-function jsqueue(num, arr) {
-    // if (arr.length > 1) {
-    //     arr.shift()
-    //     arr.push(num)
-    // } else {
-    //     arr.push(num)
-    // }
-    // const avg = arr_avg(arr)
-    return num
-}
-
-function summap(ob) {
-    let sum = 0;
-    for (let key in ob) {
-        sum += ob[key];
-    }
-    return sum
-}
-
-function sumarray(object) {
-    total = 0
-    for (const items of object) {
-        total += items.value
-    }
-    return total
-}
-
-function assigndata(object, pos) {
-    for (const [index, item] of object.entries()) {
-        console.log(index)
-        let x = 0
-        if (pos === 'r') {
-            x = 21 + index
-        } else {
-            x = 11 + index
+initcolo = perc2color(10)
+const myChart1 = new Chart(document.getElementById('mychart1'), {
+    type: 'doughnut',
+    data: {
+        labels: ["", ""],
+        datasets: [{
+            label: '',
+            data: ["1", "99"],
+            backgroundColor: [
+                initcolo,
+                "transparent"
+            ]
+        }]
+    },
+    options: {
+        responsive: false,
+        plugins: {
+            legend: {
+                display: false,
+            }
+        },
+        tooltips: {
+            enabled: false
+        },
+        animation: {
+            duration: 500
         }
-        x = 'hour' + x
-        console.log(x)
-        document.getElementById(x).innerHTML = item.value
     }
+});
+
+
+function addData1(data) {
+    console.log(data)
+    data = Math.round(data)
+    data > 100 ? data : 100
+    colo = perc2color(data)
+    alt = 100 - data
+    if (alt < 1) { alt = 0 }
+    myChart1.data.datasets.forEach((dataset) => {
+        dataset.data[0] = data;
+        dataset.data[1] = alt;
+        dataset.backgroundColor[0] = colo
+    });
+    myChart1.update(0);
+}
+
+
+const countdown = (secs) => {
+    if (isNaN(secs) || secs < 1) return
+    let interval = Math.round(secs / 3)
+    const initTime = secs
+    let incr = 0
+
+    var x = setInterval(function() {
+        // Time calculations for days, hours, minutes and seconds
+        let hours = Math.floor(secs / 3600)
+        let minutes = Math.floor(secs % 3600 / 60)
+        let seconds = Math.floor(secs % 60)
+
+        // collect time
+        hourrs.value = hours
+        minns.value = minutes
+        seccs.value = seconds
+        addData1((secs / initTime) * 100)
+
+
+
+        // If the count down is over, write some text 
+        if (secs < 1) {
+            clearInterval(x);
+            texttospeech("Time has expired.");
+        }
+        if (breakinterval == 1) {
+            clearInterval(x);
+            breakinterval = 0
+            document.getElementById('hourrs').value = 0
+            document.getElementById('minns').value = 0
+            document.getElementById('seccs').value = 0
+            eel.txttospeech("Congratulations on finishing " + document.getElementById("heading").value);
+
+        }
+
+        // If the count down is over, write some text 
+        if (incr == interval) {
+            incr = 0
+
+            msg = "You have"
+            if (hours > 0) msg = msg + hours + ' hours, '
+            if (minutes > 0) msg = msg + minutes + ' minutes, '
+            msg = msg + secs + ' seconds remaining to complete' + document.getElementById("heading").value
+
+            eel.txttospeech(msg)
+            texttospeech(msg)
+        }
+
+
+        secs = secs - 1
+        incr = incr + 1
+
+    }, 1000);
 }
 
 
 
-eel.expose(set_metrics);
+const startcount = () => {
+    const hours = isNaN(hourrs.value) ? 0 : hourrs.value
+    const mins = isNaN(minns.value) ? 0 : minns.value
+    const sekunde = isNaN(seccs.value) ? 0 : seccs.value
+    console.log(heading)
+    tymeInSec = hours * 3600 + mins * 60 + sekunde
+    countdown(tymeInSec)
+    console.log('hours: ' + hours + ' minutes: ' + mins + 'seconds' + sekunde)
+}
 
-function set_metrics(pload) {
-
-    str = pload.substring(2);
-    str = str.slice(0, -1);
-    console.log(str)
-    payload = JSON.parse(str)
-
-
-    //  {"clientID":"L1","cans":"0","packs":"0","lcases":"0","cases":"0","lspeed":"0","tstamp":"13917942","targetcases":"240","canspercase":"24","unitspercase":"1","hr_output":"0,0,0,0,0,0,0,0,0"}
-    if (payload.clientID == left_l) {
-
-        //client id
-        document.getElementById("client_left").innerHTML = payload.clientID
-            // cans
-        document.getElementById("cans1").innerHTML = payload.cans
-            // speed
-        document.getElementById("speed1").innerHTML = payload.lspeed
-            // efficiency
-        speed = jsqueue(payload.lspeed, queue1)
-        eff = (speed / target_l) * 100
-        addData1(eff)
-        document.getElementById("target1").innerHTML = target_l
-
-    }
-    if (payload.clientID == right_l) {
-
-        const speed = jsqueue(payload.lspeed, queue2)
-        eff = (speed / target_r) * 100
-        addData2(eff)
-        document.getElementById("cans2").innerHTML = payload.cans
-            // speed
-        document.getElementById("speed2").innerHTML = speed
-        document.getElementById("target2").innerHTML = target_r
-            //client id
-        document.getElementById("client_right").innerHTML = payload.clientID
-
-    }
-
+const stopcount = () => {
+    breakinterval = 1
 
 }
+
+
+document.addEventListener("DOMContentLoaded", function() {});
