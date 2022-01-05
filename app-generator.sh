@@ -1,2 +1,5 @@
+pip3 install eel
 pip3 install PyInstaller
-python3 -m eel app.py web --onefile --noconsole --icon=logo.png
+pip3 install gtts
+pip3 install playsound
+python -m eel app.py web --onefile --noconsole --icon=logo.ico

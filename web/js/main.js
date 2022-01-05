@@ -104,7 +104,7 @@ const countdown = (secs) => {
         // If the count down is over, write some text 
         if (secs < 1) {
             clearInterval(x);
-            texttospeech("Time has expired.");
+            eel.txttospeech("Time has expired.",1);
         }
         if (breakinterval == 1) {
             clearInterval(x);
@@ -112,7 +112,7 @@ const countdown = (secs) => {
             document.getElementById('hourrs').value = 0
             document.getElementById('minns').value = 0
             document.getElementById('seccs').value = 0
-            eel.txttospeech("Congratulations on finishing " + document.getElementById("heading").value);
+            eel.txttospeech("Congratulations on finishing " + document.getElementById("heading").value , 1);
 
         }
 
@@ -125,8 +125,7 @@ const countdown = (secs) => {
             if (minutes > 0) msg = msg + minutes + ' minutes, '
             msg = msg + secs + ' seconds remaining to complete' + document.getElementById("heading").value
 
-            eel.txttospeech(msg)
-            texttospeech(msg)
+            eel.txttospeech(msg,secs)
         }
 
 

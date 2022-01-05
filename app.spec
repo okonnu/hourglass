@@ -37,4 +37,8 @@ exe = EXE(pyz,
           disable_windowed_traceback=False,
           target_arch=None,
           codesign_identity=None,
+<<<<<<< HEAD
           entitlements_file=None , icon='logo.png')
+=======
+          entitlements_file=None , icon='logo.ico')
+>>>>>>> 300aab13b71fe139c9e0e956bd1d55dd788acd7e

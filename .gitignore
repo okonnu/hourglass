@@ -3,3 +3,5 @@ build*
 dist*
 simulator.py
 .*
+app.spec
+*mp3
