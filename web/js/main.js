@@ -9,7 +9,9 @@ const validate = (max, el) => {
 breakinterval = 0
 let msg = 'no message'
     // text to speech
-const texttospeech = (sentence) => {
+    eel.expose(texttospeech);
+function texttospeech (sentence) {
+    console.log('speaking...')
     let speech = new SpeechSynthesisUtterance();
     let voices = speechSynthesis.getVoices();
     speech.voice = voices.find(({ lang }) => lang == "en-US");;
@@ -19,6 +21,7 @@ const texttospeech = (sentence) => {
 
     console.log(found)
 }
+
 
 function perc2color(perc) {
     perc = perc / 1.5
@@ -103,29 +106,19 @@ const countdown = (secs) => {
 
         // If the count down is over, write some text 
         if (secs < 1) {
-            clearInterval(x);
-            eel.txttospeech("Time has expired.",1);
+            eel.txttospeech("Time has expired.");
+            location.reload();
         }
-        if (breakinterval == 1) {
-            clearInterval(x);
-            breakinterval = 0
-            document.getElementById('hourrs').value = 0
-            document.getElementById('minns').value = 0
-            document.getElementById('seccs').value = 0
-            eel.txttospeech("Congratulations on finishing " + document.getElementById("heading").value , 1);
-
-        }
+     
 
         // If the count down is over, write some text 
         if (incr == interval) {
             incr = 0
-
             msg = "You have"
             if (hours > 0) msg = msg + hours + ' hours, '
             if (minutes > 0) msg = msg + minutes + ' minutes, '
             msg = msg + secs + ' seconds remaining to complete' + document.getElementById("heading").value
-
-            eel.txttospeech(msg,secs)
+            eel.txttospeech(msg)
         }
 
 
@@ -141,15 +134,22 @@ const startcount = () => {
     const hours = isNaN(hourrs.value) ? 0 : hourrs.value
     const mins = isNaN(minns.value) ? 0 : minns.value
     const sekunde = isNaN(seccs.value) ? 0 : seccs.value
-    console.log(heading)
     tymeInSec = hours * 3600 + mins * 60 + sekunde
-    countdown(tymeInSec)
-    console.log('hours: ' + hours + ' minutes: ' + mins + 'seconds' + sekunde)
+    if (tymeInSec > 0) {
+        stopp.style.display = 'block';
+        start.style.display = 'none';
+        countdown(tymeInSec)
+    } else{
+        eel.txttospeech("specify duration in seconds, minutes and hours, then click begin")
+    }
+    
 }
 
 const stopcount = () => {
-    breakinterval = 1
-
+    stopp.style.display = 'none';
+    start.style.display = 'block';
+    eel.txttospeech("Congratulations on finishing " + document.getElementById("heading").value);
+    location.reload();
 }
 
 

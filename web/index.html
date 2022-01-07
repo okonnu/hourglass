@@ -34,11 +34,13 @@
             </div>
         </div>
         <div class="row">
-            <div class="col" style="text-align: right; margin-right: 2px;">
-                <button onclick="startcount()" style=" background-color: rgb(16, 112, 4);">Begin</button>
-            </div>
-            <div class="col" style="text-align: left; margin-left: 2px;">
-                <button onclick="stopcount()">Finish</button>
+            <div class="col" style="text-align: center; margin-right: 2px;">
+                <div id="start">
+                <button onclick="startcount()"  style=" background-color: rgb(16, 112, 4);">Begin</button>
+                </div>
+                <div  id="stopp" style="display: none;">
+                <button onclick="stopcount()" >Finish</button>
+                </div>
             </div>
 
         </div>

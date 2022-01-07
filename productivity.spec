@@ -4,7 +4,7 @@
 block_cipher = None
 
 
-a = Analysis(['app.py'],
+a = Analysis(['productivity.py'],
              pathex=[],
              binaries=[],
              datas=[('C:\\Users\\dev\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python39\\site-packages\\eel\\eel.js', 'eel'), ('web', 'web')],
@@ -26,7 +26,7 @@ exe = EXE(pyz,
           a.zipfiles,
           a.datas,  
           [],
-          name='app',
+          name='productivity',
           debug=False,
           bootloader_ignore_signals=False,
           strip=False,
