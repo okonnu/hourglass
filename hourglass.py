@@ -22,7 +22,8 @@ def txttospeech(txt):
         tts.save(voice_name)
         playsound(voice_name)
         os.remove(voice_name)
-    except:
+    except Exception as e:
+        print(e)
         eel.texttospeech(txt)
 
 # txttospeech('three minutes remaining')
